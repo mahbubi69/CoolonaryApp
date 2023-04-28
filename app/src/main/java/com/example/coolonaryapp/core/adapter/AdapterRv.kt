@@ -1,28 +1,41 @@
-//package com.example.coolonaryapp.core.adapter
-//
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.coolonaryapp.R
-//import com.example.coolonaryapp.core.model.Makanan
-//
-//class HeroAdapter(private val heroes: List<Makanan>) : RecyclerView.Adapter<HeroHolder>() {
-//    override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): HeroHolder {
-//        return HeroHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.item_rv_home, viewGroup, false))
-//    }
-//
-//    override fun getItemCount(): Int = heroes.size
-//
-//    override fun onBindViewHolder(holder: HeroHolder, position: Int) {
-//        holder.bindHero(heroes[position])
-//    }
-//}
-//
-//class HeroHolder(view: View) : RecyclerView.ViewHolder(view) {
-//    private val tvExp = view.tv
-//
-//    fun bindHero(makanan: Makanan) {
-//        tvExp.text = makanan.exp
-//    }
-//}
+package com.example.coolonaryapp.core.adapter
+
+import android.view.LayoutInflater
+
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.coolonaryapp.core.model.Makanan
+import com.example.coolonaryapp.databinding.ItemRvHomeBinding
+
+class HeroAdapter(private val listMakanan: List<Makanan>) :
+    RecyclerView.Adapter<HeroAdapter.MakananHolder>() {
+
+
+    inner class MakananHolder(val binding: ItemRvHomeBinding) :
+        RecyclerView.ViewHolder(binding.root){
+            fun bind(makananResponse : Makanan ) {
+                Glide.with(binding.root)
+                    .load(makananResponse.image)
+//                    .placeholder(R.drawable.)
+                    .into(binding.image)
+                binding.tvName.text = makananResponse.exp
+            }
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MakananHolder {
+        val binding = ItemRvHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MakananHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MakananHolder, position: Int) {
+        holder.bind(listMakanan[position])
+    }
+
+    override fun getItemCount(): Int {
+       return listMakanan.size
+    }
+
+}
+
+
