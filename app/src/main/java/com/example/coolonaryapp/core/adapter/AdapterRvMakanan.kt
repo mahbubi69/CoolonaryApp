@@ -8,20 +8,19 @@ import com.bumptech.glide.Glide
 import com.example.coolonaryapp.core.model.Makanan
 import com.example.coolonaryapp.databinding.ItemRvHomeBinding
 
-class HeroAdapter(private val listMakanan: List<Makanan>) :
-    RecyclerView.Adapter<HeroAdapter.MakananHolder>() {
-
+class AdapterRvMakanan(
+    private val listMakanan: List<Makanan>,
+) : RecyclerView.Adapter<AdapterRvMakanan.MakananHolder>() {
 
     inner class MakananHolder(val binding: ItemRvHomeBinding) :
-        RecyclerView.ViewHolder(binding.root){
-            fun bind(makananResponse : Makanan ) {
-                Glide.with(binding.root)
-                    .load(makananResponse.image)
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(makananResponse: Makanan) {
+            Glide.with(binding.root).load(makananResponse.image)
 //                    .placeholder(R.drawable.)
-                    .into(binding.image)
-                binding.tvName.text = makananResponse.exp
-            }
+                .into(binding.image)
+            binding.tvName.text = makananResponse.exp
         }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MakananHolder {
         val binding = ItemRvHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,7 +32,7 @@ class HeroAdapter(private val listMakanan: List<Makanan>) :
     }
 
     override fun getItemCount(): Int {
-       return listMakanan.size
+        return listMakanan.size
     }
 
 }

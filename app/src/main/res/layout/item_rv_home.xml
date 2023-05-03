@@ -11,8 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        tools:context=".MainActivity">
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/image"
